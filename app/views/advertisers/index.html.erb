@@ -1,0 +1,44 @@
+<h1>Advertisers</h1>
+
+
+    <!-- t.date     "date"
+    t.string   "advertiser_name"
+    t.integer  "impressions"
+    t.integer  "clicks"
+    t.integer  "post_click_activities"
+    t.integer  "post_view_activities"
+    t.decimal  "spend",                 precision: 5, scale: 2
+    t.decimal  "cpm",                   precision: 3, scale: 2
+    t.decimal  "cpa",                   precision: 4, scale: 2
+    t.decimal  "cpc",                   precision: 4, scale: 2
+    t.decimal  "ctr",                   precision: 3, scale: 2 -->
+<table id="advertisers">
+  <tr>
+    <th>Date</th>
+    <th>Advertiser Name</th>
+    <th>Impressions</th>
+    <th>Clicks</th>
+    <th>Post Click Activities</th>
+    <th>Post View Activities</th>
+    <th>Spend</th>
+    <th>CPM</th>
+    <th>CPA</th>
+    <th>CPC</th>
+    <th>CTR</th>
+  </tr>
+  <% @advertisers.each do |advertiser| %>
+    <tr>
+      <td><%= advertiser.date %></td>
+      <td><%= link_to "#{advertiser.advertiser_name}", advertisers_show_path(advertiser.advertiser_name) %></td>
+      <td><%= advertiser.impressions %></td>
+      <td><%= advertiser.clicks %></td>
+      <td><%= advertiser.post_click_activities %></td>
+      <td><%= advertiser.post_view_activities %></td>
+      <td><%= advertiser.spend %></td>
+      <td><%= advertiser.cpm %></td>
+      <td><%= advertiser.cpa %></td>
+      <td><%= advertiser.cpc %></td>
+      <td><%= advertiser.ctr %></td>
+    </tr>
+  <% end %>
+</table>

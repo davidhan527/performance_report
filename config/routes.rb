@@ -1,4 +1,9 @@
 Performance::Application.routes.draw do
+
+  get "advertisers/index"
+  get "advertisers/show"
+
+  root 'advertisers#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

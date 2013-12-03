@@ -1,2 +1,3 @@
-<h1>Advertisers#show</h1>
-<p>Find me in app/views/advertisers/show.html.erb</p>
+<h1><%= @advertiser.first.advertiser_name %></h1>
+
+<%= content_tag :div, "", id: "advertisers_chart", data: {advertiser: @advertiser} %>

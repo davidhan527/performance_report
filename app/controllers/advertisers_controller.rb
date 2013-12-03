@@ -4,6 +4,6 @@ class AdvertisersController < ApplicationController
   end
 
   def show
-    @advertiser = Advertiser.where(advertiser_name: "params[:format]")
+    @advertiser = Advertiser.where(advertiser_name: params[:format])
   end
 end

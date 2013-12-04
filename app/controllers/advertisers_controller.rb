@@ -1,6 +1,7 @@
 class AdvertisersController < ApplicationController
   def index
     @advertisers = Advertiser.order("date asc")
+    @advertisers =  Advertiser.pluck(:advertiser_name).uniq
   end
 
   def show

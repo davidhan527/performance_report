@@ -1,3 +1,60 @@
-// Place all the styles related to the advertisers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Advertiser Show Page
+
+.advertiser_heading {
+  text-align: center;
+  margin-bottom: 40px;
+  color: darkblue;
+}
+
+.chart_heading {
+  text-align: center;
+}
+// table styling
+
+#advertiser_table {
+  border-collapse: collapse;
+  margin: 50px auto 0;
+  td, th {
+  width: 4rem;
+  height: 2rem;
+  border: 1px solid #ccc;
+  text-align: center;
+  }
+  th {
+  background: lightblue;
+  border-color: white;
+  }
+  #date {
+  padding: 0 30px;
+  }
+}
+
+// Morris Styling
+
+path {
+  stroke: steelblue;
+  stroke-width: 1;
+  fill: none;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.x.axis line {
+  stroke: lightgrey;
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
+}

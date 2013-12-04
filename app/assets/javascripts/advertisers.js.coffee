@@ -7,21 +7,19 @@ jQuery ->
     element: 'advertisers_chart'
     data: $('#advertisers_chart').data('advertiser')
     xkey: 'date'
-    ykeys: ['cpm', 'cpc', 'cpa', 'ctr']
-    labels: ['CPM', 'CPC', 'CPA', 'CTR']
+    ykeys: ['cpm', 'cpc']
+    labels: ['CPM', 'CPC']
 
-
-  Morris.Line
-    element: 'advertisers_chart2'
+  Morris.Bar
+    element: 'advertisers_chart2',
     data: $('#advertisers_chart').data('advertiser')
     xkey: 'date'
-    ykeys: ['impressions', 'clicks']
-    labels: ['Impressisons', 'Clicks']    
-
+    ykeys: ['ctr']
+    labels: ['CTR']
 
   Morris.Line
     element: 'advertisers_chart3'
     data: $('#advertisers_chart').data('advertiser')
     xkey: 'date'
-    ykeys: ['post_click_activities', 'post_view_activities']
-    labels: ['Post Click Activities', 'Post View Activities']
+    ykeys: ['spend', 'cpa', 'post_click_activities', 'post_view_activities']
+    labels: ['Spend', 'CPA', 'Post Click Activities', 'Post View Activities']    

@@ -1,5 +1,42 @@
-<h1><%= @advertiser.first.advertiser_name %></h1>
+<h1 class="advertiser_heading"><%= @advertiser.first.advertiser_name %></h1>
 
+<h2 class="chart_heading">CPM / CPC</h2>
 <%= content_tag :div, "", id: "advertisers_chart", data: {advertiser: @advertiser} %>
+<h2 class="chart_heading">CTR</h2>
 <%= content_tag :div, "", id: "advertisers_chart2"%>
+<h2 class="chart_heading">Spend vs CPA / Post Click Activities / Post View Activities</h2>
 <%= content_tag :div, "", id: "advertisers_chart3"%>
+
+<table id="advertiser_table">
+  <thead>
+    <tr>
+      <th id="date">Date</th>
+      <th>Impressions</th>
+      <th>Clicks</th>
+      <th>Post Click Activities</th>
+      <th>Post View Activities</th>
+      <th>Spend</th>
+      <th>CPM</th>
+      <th>CPA</th>
+      <th>CPC</th>
+      <th>CTR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @advertiser.each do |advertiser| %>
+      <tr>
+        <td><%= advertiser.date %></td>
+        <td><%= advertiser.impressions %></td>
+        <td><%= advertiser.clicks %></td>
+        <td><%= advertiser.post_click_activities %></td>
+        <td><%= advertiser.post_view_activities %></td>
+        <td><%= advertiser.spend %></td>
+        <td><%= advertiser.cpm %></td>
+        <td><%= advertiser.cpa %></td>
+        <td><%= advertiser.cpc %></td>
+        <td><%= advertiser.ctr %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<!-- <div id="graph" class="aGraph" style="position:absolute;top:0px;left:0; float:left;"></div> -->

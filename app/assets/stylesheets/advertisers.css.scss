@@ -33,31 +33,51 @@
   }
 }
 
-// Morris Styling
+// D3 Styling
 
-path {
-  stroke: steelblue;
-  stroke-width: 1;
+.axis path,
+.axis line {
   fill: none;
-}
-
-.axis {
+  stroke: #000;
   shape-rendering: crispEdges;
-}
-
-.x.axis line {
-  stroke: lightgrey;
-}
-
-.x.axis .minor {
-  stroke-opacity: .5;
 }
 
 .x.axis path {
   display: none;
 }
 
-.y.axis line, .y.axis path {
+.line {
   fill: none;
-  stroke: #000;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }
+
+
+// Morris Styling
+
+// path {
+//   stroke: steelblue;
+//   stroke-width: 1;
+//   fill: none;
+// }
+
+// .axis {
+//   shape-rendering: crispEdges;
+// }
+
+// .x.axis line {
+//   stroke: lightgrey;
+// }
+
+// .x.axis .minor {
+//   stroke-opacity: .5;
+// }
+
+// .x.axis path {
+//   display: none;
+// }
+
+// .y.axis line, .y.axis path {
+//   fill: none;
+//   stroke: #000;
+// }

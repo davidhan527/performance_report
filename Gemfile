@@ -8,6 +8,11 @@ ruby '2.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

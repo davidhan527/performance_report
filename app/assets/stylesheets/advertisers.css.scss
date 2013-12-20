@@ -1,11 +1,14 @@
+
+// Advertiser Show Page
 #advertisers_list {
   list-style: none;
-
 }
-// Advertiser Show Page
+
+#heading {
+  margin-left: 20px;
+}
 
 .advertiser_heading {
-  // text-align: center;
   margin-bottom: 40px;
   color: darkblue;
 }
@@ -13,6 +16,7 @@
 .chart_heading {
   text-align: center;
 }
+
 // table styling
 
 #advertiser_table {
@@ -21,28 +25,10 @@
     text-align: center;
   }
 }
-// #advertiser_table {
-//   border-collapse: collapse;
-//   margin: 50px auto 0;
-//   td, th {
-//   width: 4rem;
-//   height: 2rem;
-//   border: 1px solid #ccc;
-//   text-align: center;
-//   }
-  // th {
-  // background: lightblue;
-  // border-color: white;
-  // }
-//   #date {
-//   padding: 0 30px;
-//   }
-// }
 
 ///////////////////////// D3 Styling
 
-
-// linechart
+///////// linechart
 
 path { 
   stroke: steelblue;
@@ -51,7 +37,7 @@ path {
 }
 
 
-// barchart
+///////// barchart
 
 .axis path,
 .axis line {
@@ -60,7 +46,6 @@ path {
   stroke-width: 1;
   shape-rendering: crispEdges;
 }
-
 
 .bar {
   fill: orange;
@@ -102,9 +87,6 @@ path {
   top: 100%;
   left: 0;
 }
-
-
-
 
 /////////////////////// Morris Styling
 

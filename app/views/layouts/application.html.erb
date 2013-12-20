@@ -16,8 +16,8 @@
     <div class="container">
     <main role="main">
        <%= render 'layouts/messages' %>
-      <div class="row">
-        <div class="col-md-3"><h1>Advertisers</h1>
+      <div class="row" id="container">
+        <div class="col-md-3"><h1 id="heading">Advertisers</h1>
           <ul id="advertisers_list">
             <% @advertisers.each do |advertiser| %>
               <li><%= link_to "#{advertiser}", advertisers_show_path(advertiser) %></li>

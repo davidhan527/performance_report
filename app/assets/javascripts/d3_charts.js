@@ -29,7 +29,7 @@ var tip = d3.tip()
   .offset([-10, 0])
   .html(function(d) {
     return "<strong>CTR:</strong> <span style='color:red'>" + d.ctr + "</span>" + "<br><strong>Spend:</strong> <span style='color:red'>" + d.spend + "</span>" + "<br><strong>CPA:</strong> <span style='color:red'>" + d.cpa + "</span>";
-  })
+  });
 
 var svg = d3.select("#advertisers_chart2").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -50,7 +50,7 @@ svg.call(tip);
       .style("text-anchor", "end")
       .attr("dx", "-.8em")
       .attr("dy", ".15em")
-      .attr("transform", function(d) { return "rotate(-65)" });
+      .attr("transform", function(d) { return "rotate(-65)"; });
 
   svg.append("g")
       .attr("class", "y axis")
@@ -105,7 +105,7 @@ var tipcpm = d3.tip()
 .offset([-10, 0])
 .html(function(d) {
   return "<strong>CPM:</strong> <span style='color:red'>" + d.cpm + "</span>" + "<br><strong>CPC:</strong> <span style='color:red'>" + d.cpc + "</span>";
-})
+});
 
 
 var valueline = d3.svg.line()
@@ -147,7 +147,7 @@ svg.call(tipcpm);
     .attr("cx", function(d) { return xLine(d.date); })
     .attr("cy", function(d) { return y0(d.cpm); })
     .on('mouseover', tipcpm.show)
-    .on('mouseout', tipcpm.hide)
+    .on('mouseout', tipcpm.hide);
 
   svgLine.append("path")
     .attr("class", "line")
@@ -161,16 +161,16 @@ svg.call(tipcpm);
         .attr("cx", function(d) { return xLine(d.date); })
         .attr("cy", function(d) { return y1(d.cpc); })
         .on('mouseover', tipcpm.show)
-        .on('mouseout', tipcpm.hide)    
+        .on('mouseout', tipcpm.hide);
 
   svgLine.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + heightLine + ")")
     .call(xAxisLine);
 
-  svgLine.append("g") 
+  svgLine.append("g")
     .attr("class", "y axis")
-    .style("fill", "steelblue") 
+    .style("fill", "steelblue")
     .call(yAxisLeft)
   .append("text")
     .attr("y", 6)

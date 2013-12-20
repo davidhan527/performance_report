@@ -1,11 +1,11 @@
-
-
 <h1 class="advertiser_heading"><%= @advertiser.first.advertiser_name %></h1>
 
 <h2 class="chart_heading">CPM / CPC</h2>
 <%= content_tag :div, "", id: "advertisers_chart", data: {advertiser: @advertiser} %>
+
 <h2 class="chart_heading">CTR</h2>
 <%= content_tag :div, "", id: "advertisers_chart2"%>
+
 <div class="table-responsive">
   <table id="advertiser_table" class="table table-striped table-bordered table-hover table-responsive">
     <thead>
@@ -40,4 +40,5 @@
     </tbody>
   </table>
 </div>
+
 <%= javascript_include_tag "d3_charts" %>

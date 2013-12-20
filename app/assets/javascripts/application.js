@@ -12,8 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require raphael
-//= require morris
 //= require d3.v3
+//= require bootstrap
 //= require_tree .
-

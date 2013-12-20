@@ -1,6 +1,6 @@
 class AdvertisersController < ApplicationController
   def index
-    @advertisers =  Advertiser.pluck(:advertiser_name).uniq
+    # @advertisers =  Advertiser.pluck(:advertiser_name).uniq
   end
 
   def show

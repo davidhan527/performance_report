@@ -1,14 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Performance</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Performance" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Performance" %>">
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.min.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <div class="container">
+    <main role="main">
+       <%= render 'layouts/messages' %>
+      <div class="row">
+        <div class="col-md-3"><h1>Advertisers</h1>
+          <ul id="advertisers_list">
+            <% @advertisers.each do |advertiser| %>
+              <li><%= link_to "#{advertiser}", advertisers_show_path(advertiser) %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="col-md-9">
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+  </div>
+  </body>
 </html>

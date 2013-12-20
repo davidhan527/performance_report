@@ -1,4 +1,4 @@
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.min.js"></script>
+
 
 <h1 class="advertiser_heading"><%= @advertiser.first.advertiser_name %></h1>
 
@@ -8,39 +8,40 @@
 <%= content_tag :div, "", id: "advertisers_chart2"%>
 <h2 class="chart_heading">Spend vs CPA / Post Click Activities / Post View Activities</h2>
 <%= content_tag :div, "", id: "advertisers_chart3"%>
-
-<table id="advertiser_table">
-  <thead>
-    <tr>
-      <th id="date">Date</th>
-      <th>Impressions</th>
-      <th>Clicks</th>
-      <th>Post Click Activities</th>
-      <th>Post View Activities</th>
-      <th>Spend</th>
-      <th>CPM</th>
-      <th>CPA</th>
-      <th>CPC</th>
-      <th>CTR</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @advertiser.each do |advertiser| %>
+<div class="table-responsive">
+  <table id="advertiser_table" class="table table-striped table-bordered table-hover table-responsive">
+    <thead>
       <tr>
-        <td><%= advertiser.date %></td>
-        <td><%= advertiser.impressions %></td>
-        <td><%= advertiser.clicks %></td>
-        <td><%= advertiser.post_click_activities %></td>
-        <td><%= advertiser.post_view_activities %></td>
-        <td><%= advertiser.spend %></td>
-        <td><%= advertiser.cpm %></td>
-        <td><%= advertiser.cpa %></td>
-        <td><%= advertiser.cpc %></td>
-        <td><%= advertiser.ctr %></td>
+        <th id="date">Date</th>
+        <th>Impressions</th>
+        <th>Clicks</th>
+        <th>Post Click Activities</th>
+        <th>Post View Activities</th>
+        <th>Spend</th>
+        <th>CPM</th>
+        <th>CPA</th>
+        <th>CPC</th>
+        <th>CTR</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @advertiser.each do |advertiser| %>
+        <tr>
+          <td><%= advertiser.date %></td>
+          <td><%= advertiser.impressions %></td>
+          <td><%= advertiser.clicks %></td>
+          <td><%= advertiser.post_click_activities %></td>
+          <td><%= advertiser.post_view_activities %></td>
+          <td><%= advertiser.spend %></td>
+          <td><%= advertiser.cpm %></td>
+          <td><%= advertiser.cpa %></td>
+          <td><%= advertiser.cpc %></td>
+          <td><%= advertiser.ctr %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <script type="text/javascript">
 /////////// barchart
 
@@ -49,7 +50,7 @@ var data = $('#advertisers_chart').data('advertiser');
 var parseDate = d3.time.format("%d-%b-%Y").parse;
 
 var margin = {top: 30, right: 40, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
+    width = 780 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()

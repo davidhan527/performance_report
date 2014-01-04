@@ -1,4 +1,5 @@
 class AdvertisersController < ApplicationController
+
   def index
     # @advertisers =  Advertiser.pluck(:advertiser_name).uniq
   end
@@ -6,4 +7,9 @@ class AdvertisersController < ApplicationController
   def show
     @advertiser = Advertiser.where(advertiser_name: params[:format])
   end
+
+  def aggregate
+    
+  end
+
 end

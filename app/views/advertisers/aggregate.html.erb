@@ -1,0 +1,25 @@
+<script>
+d3.csv("MediaMathPerformanceReport.csv", function (data) {
+
+  // format our data
+  var dateFormat = d3.time.format("%d-%b-%Y");
+  
+  data.forEach(function(d) { 
+    d.date  = dateFormat.parse(d.date); 
+    d.advName   = d.advertiser_name;
+    d.impressions   = d.impressions;
+    d.clicks  = +d.clicks;
+    d.post_click_activities = +d.post_click_activities;
+    d.post_view_activities = +d.post_view_activities;
+    d.spend = +d.spend;
+    d.cpm = +d.cpm;
+    d.cpa = +d.cpa;
+    d.cpc = +d.cpc;
+    d.ctr = +d.ctr;
+  });
+
+
+  console.log(data);
+
+});
+</script>

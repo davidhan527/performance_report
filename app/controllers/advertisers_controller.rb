@@ -9,7 +9,7 @@ class AdvertisersController < ApplicationController
   end
 
   def aggregate
-    
+    render :layout => false
   end
 
 end

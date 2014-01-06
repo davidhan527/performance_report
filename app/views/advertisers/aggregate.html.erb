@@ -1,8 +1,70 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Performance" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Performance" %>">
+    <link href="/assets/dc.css?body=1" media="all" rel="stylesheet" />
+    <link href="/assets/framework_and_overrides.css?body=1" media="all" rel="stylesheet" />
+    <%= javascript_include_tag "application" %>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.min.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
+
+<body>
+  <header>
+    <%= render 'layouts/navigation' %>
+  </header>
+<div class='container' id='main-container'>
+<main role='main'>
+  <div class='container' style='font: 12px sans-serif;'>
+  <h3>Performance Chart</h3>
+    <div class='row'>
+        <div class='col-md-3'>
+          <div class='col-md-12' id='dc-ctr-pie-chart'>
+            <h4>CTR</h4>
+          </div>
+          <div class='col-md-12 nopadding' id='dc-advertisers-chart'>
+            <h4>Advertisers Total Spend</h4>
+          </div>
+        </div>
+          <div class='col-md-9 nopadding' id="dc-ctr-chart">
+            <h4>CTR</h4>
+          </div>        
+      <div class='col-md-9' id='dc-time-chart'>
+        <h4>CPA</h4>
+      </div>
+
+      <div class='col-md-8'>
+          <table class='advertiser_table table table table-striped table-bordered table-hover table-responsive' id='dc-table-graph'>
+            <thead>
+              <tr class='header'>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Impressions</th>
+                <th>Clicks</th>
+                <th>Post Click Activities</th>
+                <th>Post View Activities</th>
+                <th>Spend</th>
+                <th>CPM</th>
+                <th>CPA</th>
+                <th>CPC</th>
+                <th>CTR</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+  
 <script>
+
 d3.csv("/MediaMathPerformanceReport.csv", function (data) {
 
-  // format our data
-  var dateFormat = d3.time.format("%d-%b-%Y");
+  var dateFormat = d3.time.format("%Y-%m-%d");
   
   data.forEach(function(d) { 
     d.date  = dateFormat.parse(d.date); 
@@ -17,9 +79,124 @@ d3.csv("/MediaMathPerformanceReport.csv", function (data) {
     d.cpc = +d.cpc;
     d.ctr = +d.ctr;
   });
-
-
   console.log(data);
 
+  var ctrChart = dc.lineChart("#dc-ctr-chart");
+  var cpaChart = dc.lineChart("#dc-time-chart");
+  var advertisersChart = dc.rowChart("#dc-advertisers-chart");
+  var dataTable = dc.dataTable("#dc-table-graph");
+  var ctrPieChart = dc.pieChart("#dc-ctr-pie-chart");
+
+  var facts = crossfilter(data);
+
+  var ctrDate = facts.dimension(function (d) {
+    return d.date;
+  });
+  var ctrValueGroupSum = ctrDate.group().reduceSum(function(d) { return d.ctr; });
+  var ctrValueGroupCount = ctrDate.group(function(d) {
+    return d.ctr;
+  })
+
+
+  var advertisersDimension = facts.dimension(function (d) {
+    return d.advertiser_name;
+  })
+
+  var adveristersGroup = advertisersDimension.group().reduceSum(function(d) {return d.spend});
+
+  var cpaDimension = facts.dimension(function (d) {
+    return d.date;
+  });
+  var cpaGroup = cpaDimension.group().reduceSum(function(d) { return d.cpa; });
+
+  var ctrPercent = facts.dimension(function(d) {
+    return d.ctr > 0.15 ? 'CTR >= 1.5%' : 'CTR < 1.5%';
+  });
+
+  var ctrPercentGroup = ctrPercent.group();
+    
+
+/***************************************
+*   Step4: Create the Visualisations   *
+***************************************/
+  
+  advertisersChart.width(280)
+    .height(1000)
+    .margins({top: 5, left: 10, right: 10, bottom: 20})
+    .dimension(advertisersDimension)
+    .group(adveristersGroup)
+    .colors(["#16cc14"])
+    .label(function (d) {
+      return d.key;
+    })
+    .title(function(d) {return d.value;})
+    .elasticX(true)
+    .xAxis().ticks(4);
+
+  ctrChart.width(800)
+    .height(180)
+    .margins({top: 10, right: 20, bottom: 20, left: 40})
+    .dimension(ctrDate)
+    .group(ctrValueGroupSum)
+  .transitionDuration(500)
+    // .centerBar(true)
+    // .gap(1)   
+    .x(d3.time.scale().domain(d3.extent(data, function(d) {return d.date})))
+  .elasticY(true)
+  .xAxis()
+  .tickFormat();
+
+  cpaChart.width(800)
+    .height(180)
+    .margins({top: 10, right: 20, bottom: 20, left: 40})
+    .dimension(cpaDimension)
+    .group(cpaGroup)
+    .transitionDuration(500)
+  .elasticY(true)
+    .x(d3.time.scale().domain(d3.extent(data, function(d) {return d.date})))
+    .xAxis();
+
+  ctrPieChart.width(250)
+  .height(220)
+  .transitionDuration(500)
+  .radius(100)
+  .innerRadius(30)
+  .dimension(ctrPercent)
+  .group(ctrPercentGroup)
+  .title(function(d) {return d.value; })
+  .colors(["#195fff","#ff0000", "#ff4040","#ff7373","#67e667","#39e639","#00cc00"]);
+  // .colorDomain([0, 100])
+  // .colorAccessor(function(d, i){return d.varlue;});
+  
+
+  // Table of advertiseres data
+  dataTable.width(800).height(800)
+    .dimension(cpaDimension)
+  .group(function(d) { return "Advertisers List"
+   })
+  .size(50)  
+    .columns([
+      function(d) { return dateFormat(d.date); },
+      function(d) { return d.advName; },
+      function(d) { return d.impressions; },
+      function(d) { return d.clicks; },
+      function(d) { return d.post_click_activities; },
+      function(d) { return d.post_view_activities; },
+      function(d) { return d.spend; },
+      function(d) { return d.cpm; },
+      function(d) { return d.cpa; },
+      function(d) { return d.cpc; },
+      function(d) { return d.ctr; }
+    
+    ])
+    .sortBy(function(d){ return d.date; })
+    .order(d3.ascending);
+
+  dc.renderAll();
+  
 });
+  
 </script>
+    
+</body>
+</html>
